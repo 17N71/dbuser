@@ -1,43 +1,50 @@
 import React, {useState} from 'react';
-
-function DataView({db}) {
-    const [dropDown, setDropDown] = useState(false)
-    const [dropDropDown, setDropDropDown] = useState(false)
-    function dropOne(event){
+import '../style.css'
+function DataView({item}) {
+    const [isDropCompany, setIsDropCompany] = useState(false)
+    const [isDropAddress, setIsDropAddress] = useState(false)
+    const [isNestedDropDown, setIsNestedDropDown] = useState(false)
+    function dropCompany(event){
         event.stopPropagation()
-        setDropDown(!dropDown)
+        setIsDropCompany(!isDropCompany)
     }
-    function dropSecond(event){
+    function dropAddress(event){
         event.stopPropagation()
-        setDropDropDown(!dropDropDown)
+        setIsNestedDropDown(false)
+        setIsDropAddress(!isDropAddress)
+    }
+    function nestedDropDown(event){
+        event.stopPropagation()
+        setIsNestedDropDown(!isNestedDropDown)
     }
     return (
-        <>
-                {db.map((user)=>{
-                    return <ul>
-                        <li>{user.firstName}</li>
-                        <li>{user.lastName}</li>
-                        <li>{user.age}</li>
-                        <li>{user.phone}</li>
-                        <li>{user.email}</li>
-                        <li onClick={dropOne}>address
-                            {dropDown ? <ul>
-                                <li>{user.address.city}</li>
-                                <li>{user.address.street}</li>
-                                <li>{user.address.suite}</li>
-                                <li>{user.address.zipcode}</li>
-                                <li onClick={dropSecond}>
-                                    geo
-                                    {dropDropDown && dropDown?<ul>
-                                        <li>{user.address.geo.lat}</li>
-                                        <li>{user.address.geo.lng}</li>
-                                    </ul>:""}
+                      <ul>
+                        <li>Անուն {item.firstName}</li>
+                        <li>Ազգանուն {item.lastName}</li>
+                        <li>Տարիք {item.age}</li>
+                        <li>Հեռախոսահամար {item.phone}</li>
+                        <li>Email {item.email}</li>
+                        <li role='button'  onClick={dropCompany}>company
+                            <ul className={`drop ${isDropCompany?"viscomp":"hidcomp"}`} onClick={e=>e.stopPropagation()}>
+                                <li>Ընկերության անուն {item.company.name}</li>
+                                <li>Փաշտոն {item.company.catchPhrase}</li>
+                            </ul>
+                        </li>
+                        <li role='button' onClick={dropAddress}>Address
+                            <ul className={`drop ${isDropAddress?"visad":"hidad"}`} onClick={e=>e.stopPropagation()}>
+                                <li>Քաղաք {item.address.city}</li>
+                                <li>Փողոց {item.address.street}</li>
+                                <li>Թաղամաս {item.address.suite}</li>
+                                <li>ՓոստԿոդ {item.address.zipcode}</li>
+                                <li role='button' onClick={nestedDropDown}>geo
+                                    <ul className={`drop ${isNestedDropDown?"nested-vis":"nested-hide"}`} onClick={e=>e.stopPropagation()}>
+                                        <li>կորդինատ 1 {item.address.geo.lat}</li>
+                                        <li>կորդինատ 2 {item.address.geo.lng}</li>
+                                    </ul>
                                 </li>
-                            </ul>:""}
+                            </ul>
                         </li>
                     </ul>
-                })}
-        </>
     );
 }
 

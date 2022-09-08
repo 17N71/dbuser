@@ -1,0 +1,75 @@
+.container{
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-around;
+
+}
+
+.container ul{
+    padding: 25px 10px;
+    background-color: crimson;
+}
+
+ul{
+    list-style: none;
+
+}
+li ul{
+    margin: 10px 0;
+}
+li[role="button"]{
+    cursor: pointer;
+    border: 2px solid black;
+    padding: 2px 3px;
+    background-color: crimson;
+}
+li[role="button"] ~li[role="button"]{
+    margin: 10px 0;
+}
+li[role="button"] li[role="button"]{
+    background-color: crimson;
+}
+li[role="button"] li[role="button"] ul {
+    background-color: orangered;
+}
+li[role="button"] ul {
+    cursor: default;
+    background-color: orangered;
+}
+drop{
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+.visad{
+    opacity: 1;
+    position: static;
+    visibility: visible;
+}
+.hidad{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+.hidcomp{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+.viscomp{
+    opacity: 1;
+    position: static;
+    visibility: visible;
+}
+.nested-vis{
+    opacity: 1;
+    position: static;
+    visibility: visible;
+}
+.nested-hide {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}

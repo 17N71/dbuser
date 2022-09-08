@@ -1,10 +1,17 @@
 import DataView from "./DataView/DataView.jsx";
 
 function App({db}) {
-
+    const sts= {
+        display:"flex",
+        flexDirection:"column",
+        alignItems:'center',
+        gap:"50px",
+        justifyContent:"space-around",
+    }
   return (
-    <div className="App">
-        <DataView db={db} />
+    <div style={sts} className="App">
+        {db.map((item,index)=><DataView key={index} item={item} />)}
+
     </div>
   )
 }
